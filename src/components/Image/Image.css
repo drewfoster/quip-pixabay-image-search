@@ -1,0 +1,37 @@
+.image > img {
+  height: 100px;
+}
+div.image {
+  display: inline-flex;
+  margin: 3px;
+}
+
+.max-width {
+  max-width: 100%;
+}
+
+.searchButton {
+  position: absolute;
+  display: none;
+  top: 0;
+  right: -50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 0 0;
+}
+.large img {
+  width: 800px;
+  max-width: 100%;
+}
+.searchButton:hover {
+  background-color: #ffffff;
+}
+.imageWrapper {
+  width: 100%;
+}
+div.large:hover .searchButton{
+  top: 0;
+  right:0;
+  display:block;
+  -webkit-transition: right 0.5s, display 1s, -webkit-transform 1s; /* Safari */
+  transition: right 0.5s, display 1s, transform 1s;
+}
