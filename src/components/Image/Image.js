@@ -34,9 +34,7 @@ class Image extends React.Component {
                   record={this.props.selectedImage.get("selectedImage")}
                   placeholderWidth={800}
                   placeholderHeight={600}
-                  width={800}
-                  responsiveToContainerWidth={true}
-                  allowResizing={true}
+                  responsiveToContainerWidth
               />
               <button className="searchButton" onClick={this.props.searchAgain}>search</button>
             </div>

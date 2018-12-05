@@ -158,16 +158,23 @@ div.image {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 0 0 0 0;
 }
-.large img {
-  width: 800px;
-  max-width: 100%;
+
+.image-wrapper > .image-container {
+  width: auto !important;
 }
+
+.image-wrapper > .image-container > .image-mask {
+  width: auto !important;
+}
+
+.image-wrapper > .image-container > .image-mask > img {
+  width: 100% !important;
+}
+  
 .searchButton:hover {
   background-color: #ffffff;
 }
-.imageWrapper {
-  width: 100%;
-}
+
 div.large:hover .searchButton{
   top: 0;
   right:0;
