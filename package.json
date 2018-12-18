@@ -9,7 +9,7 @@
     },
     "author": "Andrew Foster",
     "devDependencies": {
-        "quip-apps-webpack-config": ">=0.0.29"
+        "quip-apps-webpack-config": "0.0.41"
     },
     "dependencies": {
         "react-responsive-modal": "^3.3.0"

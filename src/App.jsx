@@ -20,7 +20,9 @@ class App extends Component {
       selectedImage: {},
       imageContext: "list",
       applicationStatus: "placeholder",
-      searchPlaceholder: "Search Pixabay - Free to use images"
+      searchPlaceholder: "Search Pixabay - Free to use images",
+      showSpinnerDisplay: false,
+      imageListMessage: "Your results will appear here!"
     };
 
     this.searchPixabay = this.searchPixabay.bind(this);
@@ -29,6 +31,8 @@ class App extends Component {
     this.uploadSelectedImage = this.uploadSelectedImage.bind(this);
     this.searchAgain = this.searchAgain.bind(this);
     this.getImage = this.getImage.bind(this);
+    this.toggleSpinnerDisplay = this.toggleSpinnerDisplay.bind(this);
+    this.openLink = this.openLink.bind(this);
   }
 
   componentDidMount() {
@@ -37,8 +41,12 @@ class App extends Component {
 
   searchPixabay( term ) {
     Pixabay.search( term ).then(images => {
-      console.log(images);
-      this.setState({images: images, searchPlaceholder: term});
+      console.log("Images Length = " + images.length);
+      if(images.length > 0) {
+        this.setState({images: images, searchPlaceholder: term, showSpinnerDisplay: false});
+      } else {
+        this.setState({imageListMessage: "Your search returned no results.  Please try again.", images: [], showSpinnerDisplay: false})
+      }
     });
   }
 
@@ -49,6 +57,14 @@ class App extends Component {
       this.setState({displayOverlay: false});
     }
 
+  }
+
+  toggleSpinnerDisplay() {
+    if (this.state.showSpinnerDisplay === false) {
+      this.setState({showSpinnerDisplay: true});
+    } else {
+      this.setState({showSpinnerDisplay: false});
+    }
   }
 
   selectImage( image ) {
@@ -84,6 +100,10 @@ class App extends Component {
     this.toggleOverlay();
   }
 
+  openLink(link) {
+    console.log("App.js openLink Fired! " + link);
+    quip.apps.openLink(link);
+  }
 
   render() {
     let App;
@@ -96,7 +116,7 @@ class App extends Component {
     return (
       <div className="App">
         {App}
-        { this.state.displayOverlay ? (<Overlay searchPixabay={this.searchPixabay} searchPlaceholder={this.state.searchPlaceholder} selectImage={this.selectImage} images={this.state.images} image={this.state.selectedImage} displayOverlay={this.state.displayOverlay} toggleOverlay={this.toggleOverlay} uploadImage={this.uploadSelectedImage}/>) : undefined }
+        { this.state.displayOverlay ? (<Overlay imageListMessage={this.state.imageListMessage} openLink={this.openLink} showSpinnerDisplay={this.state.showSpinnerDisplay} toggleSpinnerDisplay={this.toggleSpinnerDisplay} searchPixabay={this.searchPixabay} searchPlaceholder={this.state.searchPlaceholder} selectImage={this.selectImage} images={this.state.images} image={this.state.selectedImage} displayOverlay={this.state.displayOverlay} toggleOverlay={this.toggleOverlay} uploadImage={this.uploadSelectedImage}/>) : undefined }
       </div>
     );
   }

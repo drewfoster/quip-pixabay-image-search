@@ -5,6 +5,17 @@ import './ImagePreview.css';
 
 class ImagePreview extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.openLink = this.openLink.bind(this);
+  }
+
+  openLink(e) {
+    console.log("openLink Clicked")
+    this.props.openLink(this.props.image.pageURL);
+  }
+
   render() {
       return (
         <div className="">
@@ -15,7 +26,7 @@ class ImagePreview extends React.Component {
               <a onClick={this.props.uploadImage}>Pick Me!</a>
             </div>
             <div>
-              <a href={this.props.image.pageURL}>
+              <a onClick={this.openLink}>
                 <img className="logo" src="https://pixabay.com/static/img/logo.png" alt="Pixabay logo"/>
               </a>
             </div>
