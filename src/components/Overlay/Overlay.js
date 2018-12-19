@@ -15,7 +15,7 @@ class Overlay extends React.Component {
           <div className="modal" id="modal">
             <div className="modalContents">
               <h2>Search - Pixabay</h2>
-                <SearchBar searchPixabay={this.props.searchPixabay} toggleSpinnerDisplay={this.props.toggleSpinnerDisplay} searchPlaceholder={this.props.searchPlaceholder} />
+                <SearchBar searchPixabay={this.props.searchPixabay} toggleSpinnerDisplay={this.props.toggleSpinnerDisplay} deSelectImage={this.props.selectImage} image={this.props.image} searchPlaceholder={this.props.searchPlaceholder} />
                 { this.props.showSpinnerDisplay === true ? <Spinner /> : undefined }
                 {
                   this.props.image.id ?

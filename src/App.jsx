@@ -41,7 +41,6 @@ class App extends Component {
 
   searchPixabay( term ) {
     Pixabay.search( term ).then(images => {
-      console.log("Images Length = " + images.length);
       if(images.length > 0) {
         this.setState({images: images, searchPlaceholder: term, showSpinnerDisplay: false});
       } else {
@@ -68,10 +67,10 @@ class App extends Component {
   }
 
   selectImage( image ) {
-    if (image.id === this.state.selectedImage.id) {
-      this.setState({selectedImage: {}});
-    } else {
+    if (image) {
       this.setState({selectedImage: image});
+    } else {
+      this.setState({selectedImage: {}});
     }
   }
 

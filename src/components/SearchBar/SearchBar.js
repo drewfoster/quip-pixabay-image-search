@@ -22,6 +22,7 @@ class SearchBar extends React.Component {
   }
 
   handleSearch(e) {
+    this.props.deSelectImage({});
     this.props.toggleSpinnerDisplay();
     this.props.searchPixabay(this.state.term);
     e.preventDefault();

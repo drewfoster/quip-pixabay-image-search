@@ -4689,6 +4689,7 @@ var SearchBar = function (_React$Component) {
   }, {
     key: 'handleSearch',
     value: function handleSearch(e) {
+      this.props.deSelectImage({});
       this.props.toggleSpinnerDisplay();
       this.props.searchPixabay(this.state.term);
       e.preventDefault();
@@ -4707,13 +4708,13 @@ var SearchBar = function (_React$Component) {
         'div',
         { className: 'SearchBar', __source: {
             fileName: _jsxFileName,
-            lineNumber: 39
+            lineNumber: 40
           },
           __self: this
         },
         _react2.default.createElement('input', { id: 'search', placeholder: this.props.searchPlaceholder, onChange: this.handleTermChange, onKeyPress: this.onEnterKeyPressed, __source: {
             fileName: _jsxFileName,
-            lineNumber: 40
+            lineNumber: 41
           },
           __self: this
         }),
@@ -4721,7 +4722,7 @@ var SearchBar = function (_React$Component) {
           'a',
           { onClick: this.handleSearch, __source: {
               fileName: _jsxFileName,
-              lineNumber: 41
+              lineNumber: 42
             },
             __self: this
           },
@@ -5031,27 +5032,82 @@ var ImagePreview = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            {
-              __source: {
+            { className: 'ImageProfile', __source: {
                 fileName: _jsxFileName,
                 lineNumber: 28
               },
               __self: this
             },
             _react2.default.createElement(
-              'a',
-              { onClick: this.openLink, __source: {
+              'div',
+              {
+                __source: {
                   fileName: _jsxFileName,
                   lineNumber: 29
                 },
                 __self: this
               },
-              _react2.default.createElement('img', { className: 'logo', src: 'https://pixabay.com/static/img/logo.png', alt: 'Pixabay logo', __source: {
+              _react2.default.createElement(
+                'a',
+                { onClick: this.openLink, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 30
+                  },
+                  __self: this
+                },
+                _react2.default.createElement('img', { className: 'logo', src: 'https://pixabay.com/static/img/logo.png', alt: 'Pixabay logo', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 31
+                  },
+                  __self: this
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 30
+                  lineNumber: 34
                 },
                 __self: this
-              })
+              },
+              _react2.default.createElement(
+                'p',
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 35
+                  },
+                  __self: this
+                },
+                'Photographer: ',
+                this.props.image.user
+              ),
+              _react2.default.createElement(
+                'p',
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 36
+                  },
+                  __self: this
+                },
+                'Tags: ',
+                this.props.image.tags
+              ),
+              _react2.default.createElement(
+                'p',
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 37
+                  },
+                  __self: this
+                },
+                'Source: ',
+                this.props.image.pageURL
+              )
             )
           )
         )
@@ -10226,7 +10282,6 @@ var App = function (_Component) {
       var _this2 = this;
 
       _Pixabay2.default.search(term).then(function (images) {
-        console.log("Images Length = " + images.length);
         if (images.length > 0) {
           _this2.setState({ images: images, searchPlaceholder: term, showSpinnerDisplay: false });
         } else {
@@ -10255,10 +10310,10 @@ var App = function (_Component) {
   }, {
     key: 'selectImage',
     value: function selectImage(image) {
-      if (image.id === this.state.selectedImage.id) {
-        this.setState({ selectedImage: {} });
-      } else {
+      if (image) {
         this.setState({ selectedImage: image });
+      } else {
+        this.setState({ selectedImage: {} });
       }
     }
   }, {
@@ -10327,14 +10382,14 @@ var App = function (_Component) {
       if (this.props.showPlaceholder === true && this.state.applicationStatus === 'placeholder') {
         App = _react2.default.createElement(_Placeholder2.default, { toggleOverlay: this.toggleOverlay, __source: {
             fileName: _jsxFileName,
-            lineNumber: 111
+            lineNumber: 110
           },
           __self: this
         });
       } else {
         App = _react2.default.createElement(_Image2.default, { selectedImage: this.props.selectedImage, image: this.state.selectedImage, key: this.state.selectedImage.id, searchAgain: this.searchAgain, imageContext: 'selectedImage', __source: {
             fileName: _jsxFileName,
-            lineNumber: 113
+            lineNumber: 112
           },
           __self: this
         });
@@ -10344,14 +10399,14 @@ var App = function (_Component) {
         'div',
         { className: 'App', __source: {
             fileName: _jsxFileName,
-            lineNumber: 117
+            lineNumber: 116
           },
           __self: this
         },
         App,
         this.state.displayOverlay ? _react2.default.createElement(_Overlay2.default, { imageListMessage: this.state.imageListMessage, openLink: this.openLink, showSpinnerDisplay: this.state.showSpinnerDisplay, toggleSpinnerDisplay: this.toggleSpinnerDisplay, searchPixabay: this.searchPixabay, searchPlaceholder: this.state.searchPlaceholder, selectImage: this.selectImage, images: this.state.images, image: this.state.selectedImage, displayOverlay: this.state.displayOverlay, toggleOverlay: this.toggleOverlay, uploadImage: this.uploadSelectedImage, __source: {
             fileName: _jsxFileName,
-            lineNumber: 119
+            lineNumber: 118
           },
           __self: this
         }) : undefined
@@ -10527,7 +10582,7 @@ var Overlay = function (_React$Component) {
             },
             'Search - Pixabay'
           ),
-          _react2.default.createElement(_SearchBar2.default, { searchPixabay: this.props.searchPixabay, toggleSpinnerDisplay: this.props.toggleSpinnerDisplay, searchPlaceholder: this.props.searchPlaceholder, __source: {
+          _react2.default.createElement(_SearchBar2.default, { searchPixabay: this.props.searchPixabay, toggleSpinnerDisplay: this.props.toggleSpinnerDisplay, deSelectImage: this.props.selectImage, image: this.props.image, searchPlaceholder: this.props.searchPlaceholder, __source: {
               fileName: _jsxFileName,
               lineNumber: 18
             },

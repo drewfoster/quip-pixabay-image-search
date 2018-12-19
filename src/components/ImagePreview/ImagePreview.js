@@ -25,10 +25,17 @@ class ImagePreview extends React.Component {
               <a className="grey" onClick={this.props.deSelectImage}>Back</a>
               <a onClick={this.props.uploadImage}>Pick Me!</a>
             </div>
-            <div>
-              <a onClick={this.openLink}>
-                <img className="logo" src="https://pixabay.com/static/img/logo.png" alt="Pixabay logo"/>
-              </a>
+            <div className="ImageProfile">
+              <div>
+                <a onClick={this.openLink}>
+                  <img className="logo" src="https://pixabay.com/static/img/logo.png" alt="Pixabay logo"/>
+                </a>
+              </div>
+              <div>
+                <p>Photographer: {this.props.image.user}</p>
+                <p>Tags: {this.props.image.tags}</p>
+                <p>Source: {this.props.image.pageURL}</p>
+              </div>
             </div>
           </div>
         </div>
