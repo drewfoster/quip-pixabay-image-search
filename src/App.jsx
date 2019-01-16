@@ -39,8 +39,8 @@ class App extends Component {
     quip.apps.enableResizing();
   }
 
-  searchPixabay( term ) {
-    Pixabay.search( term ).then(images => {
+  searchPixabay( term , numberOfResultsRequested, pageRequested, orientation ) {
+    Pixabay.search( term , numberOfResultsRequested, pageRequested, orientation ).then(images => {
       if(images.length > 0) {
         this.setState({images: images, searchPlaceholder: term, showSpinnerDisplay: false});
       } else {

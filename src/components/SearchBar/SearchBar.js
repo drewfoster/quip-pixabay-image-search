@@ -6,7 +6,10 @@ class SearchBar extends React.Component {
     super(props);
 
     this.state = {
-      term: ''
+      term: '',
+      numberOfResultsRequested: 20,
+      pageRequested: 1,
+      orientation: "all"
     }
 
     this.handleTermChange = this.handleTermChange.bind(this);
@@ -24,7 +27,7 @@ class SearchBar extends React.Component {
   handleSearch(e) {
     this.props.deSelectImage({});
     this.props.toggleSpinnerDisplay();
-    this.props.searchPixabay(this.state.term);
+    this.props.searchPixabay( this.state.term, this.state.numberOfResultsRequested, this.state.pageRequested, this.state.orientation);
     e.preventDefault();
   }
 
@@ -36,10 +39,11 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-
-      <div className="SearchBar">
-        <input id="search" placeholder={this.props.searchPlaceholder} onChange={this.handleTermChange} onKeyPress={this.onEnterKeyPressed}></input>
-        <a onClick={this.handleSearch}>Lets Go!</a>
+      <div>
+        <div className="SearchBar">
+          <input type="search" id="search" placeholder={this.props.searchPlaceholder} onChange={this.handleTermChange} onKeyPress={this.onEnterKeyPressed}></input>
+          <a onClick={this.handleSearch}>Lets Go!</a>
+        </div>
       </div>
 
     );
